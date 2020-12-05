@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>サブセット化するときにテキスト抽出したかったから書いてみたやつ。</title>
+</head>
+
+<body>
+    <div class="result"></div>
+    <script>
+        //対象文字列
+        const data = "ここに重複した分のテキストを入力したりする。本当はファイルとか読み込みたい。美しくないので並び替えもしたい…";
+
+        //1文字ずつに配列化
+        let split = data.split('');
+
+        console.log(split);
+        //重複文字列の削除
+        let delData = split.filter(function (x, i, self) {
+            return self.indexOf(x) === i;
+        });
+        console.log(delData);
+
+        //サブセット化用テキスト
+        let result = '';
+        for (let i = 0; i < delData.length; i++) {
+            result += delData[i];
+        }
+        console.log(result);
+        var viewText = document.getElementsByClassName('result');
+        viewText[0].innerText = result;
+    </script>
+</body>
+
+</html>
