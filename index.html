@@ -8,29 +8,43 @@
 </head>
 
 <body>
+    <h1>サブセット化するときに重複文字を削除したりするよ</h1>
+    <div class="data-input">
+        <div class="data-input__container">
+            <textarea name="textData" id="" cols="30" rows="10"></textarea>
+            <button type="button" id="js-on">実行</button>
+        </div>
+    </div>
     <div class="result"></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
+        $('#js-on').click(function(){
         //対象文字列
-        const data = "ここに重複した分のテキストを入力したりする。本当はファイルとか読み込みたい。美しくないので並び替えもしたい…";
-
+        let textData = $('[name="textData"]').val();
+        textData = textData.replaceAll('\n','');
+          // console.log(textData);
+            
         //1文字ずつに配列化
-        let split = data.split('');
+        let split = textData.split('');
+        //ざっくり並べ替え
+        split.sort();
 
-        console.log(split);
+        //console.log(split);
         //重複文字列の削除
         let delData = split.filter(function (x, i, self) {
             return self.indexOf(x) === i;
         });
-        console.log(delData);
+        //console.log(delData);
 
         //サブセット化用テキスト
         let result = '';
         for (let i = 0; i < delData.length; i++) {
             result += delData[i];
         }
-        console.log(result);
-        var viewText = document.getElementsByClassName('result');
+        //console.log(result);
+        let viewText = document.getElementsByClassName('result');
         viewText[0].innerText = result;
+        });
     </script>
 </body>
 
